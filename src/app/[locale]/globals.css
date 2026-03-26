@@ -1,0 +1,46 @@
+@import "tailwindcss";
+
+:root {
+  --background: #FFFDF5; /* playceCream */
+  --foreground: #1E293B; /* playceInk */
+  
+  --color-playce-blue: #3B82F6;
+  --color-playce-teal: #14B8A6;
+  --color-playce-leaf: #34D399;
+  --color-playce-sun: #FBBF24;
+  --color-playce-orange: #F97316;
+  --color-playce-coral: #FB7185;
+  --color-playce-cream: #FFFDF5;
+  --color-playce-ink: #1E293B;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-playceBlue: var(--color-playce-blue);
+  --color-playceTeal: var(--color-playce-teal);
+  --color-playceLeaf: var(--color-playce-leaf);
+  --color-playceSun: var(--color-playce-sun);
+  --color-playceOrange: var(--color-playce-orange);
+  --color-playceCoral: var(--color-playce-coral);
+  --color-playceCream: var(--color-playce-cream);
+  --color-playceInk: var(--color-playce-ink);
+  
+  --font-sans: var(--font-lexend, "Lexend", sans-serif);
+  --font-heading: var(--font-nunito, "Nunito", sans-serif);
+  
+  --radius-xl: 1.5rem;
+  --radius-2xl: 2rem;
+  --radius-full: 9999px;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+@layer utilities {
+  .clip-blob {
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  }
+}
