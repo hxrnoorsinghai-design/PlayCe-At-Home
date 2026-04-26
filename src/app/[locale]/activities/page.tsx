@@ -7,6 +7,7 @@ import { MarketCountGame } from "@/components/activities/MarketCountGame";
 import { StoryBuilder } from "@/components/activities/StoryBuilder";
 import { BreathingGuide } from "@/components/activities/BreathingGuide";
 import { TimerModule } from "@/components/activities/TimerModule";
+import { ActivitiesAudioPlayer } from "@/components/activities/ActivitiesAudioPlayer";
 
 import { ActivitiesGuideInit, ActivitiesGuideWrapper } from "@/components/activities/ActivitiesGuideWrapper";
 
@@ -106,6 +107,7 @@ export default async function ActivitiesPage({ params }: { params: Promise<{ loc
   return (
     <div className="overflow-hidden">
       <ActivitiesGuideInit />
+      <ActivitiesAudioPlayer />
       {/* Hero */}
       <section className="relative py-24 px-4 gradient-mesh">
         <div className="max-w-4xl mx-auto text-center relative z-10">
