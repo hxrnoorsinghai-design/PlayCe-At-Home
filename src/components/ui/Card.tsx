@@ -1,14 +1,25 @@
-import * as React from "react"
+import { type ReactNode } from "react";
 
-const Card = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
-  ({ className = "", ...props }, ref) => (
-    <div
-      ref={ref}
-      className={`rounded-2xl border border-gray-100 bg-white text-playceInk shadow-sm transition-shadow hover:shadow-md ${className}`}
-      {...props}
-    />
-  )
-)
-Card.displayName = "Card"
+interface CardProps {
+  children: ReactNode;
+  className?: string;
+  variant?: "default" | "photo" | "glass" | "feature";
+  style?: React.CSSProperties;
+}
 
-export { Card }
+export function Card({ children, className = "", variant = "default", style }: CardProps) {
+  const baseStyles = "rounded-2xl transition-all duration-400";
+
+  const variants = {
+    default: `${baseStyles} bg-white border border-warm-200 shadow-playful hover-lift`,
+    photo: `${baseStyles} overflow-hidden bg-white shadow-playful hover-lift hover-image-zoom`,
+    glass: `${baseStyles} frosted-glass shadow-playful hover-lift`,
+    feature: `${baseStyles} bg-white border border-warm-200 shadow-playful hover-lift overflow-hidden`,
+  };
+
+  return (
+    <div className={`${variants[variant]} ${className}`} style={style}>
+      {children}
+    </div>
+  );
+}

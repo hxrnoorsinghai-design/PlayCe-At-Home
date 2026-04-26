@@ -1,43 +1,73 @@
-import * as React from "react"
-import { Slot } from "@radix-ui/react-slot"
+import { type ReactNode, type ButtonHTMLAttributes } from "react";
 
-export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  asChild?: boolean
-  variant?: "default" | "secondary" | "outline" | "ghost"
-  size?: "default" | "sm" | "lg" | "icon"
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  children: ReactNode;
+  variant?: "primary" | "secondary" | "outline" | "playful" | "magic";
+  size?: "sm" | "md" | "lg";
+  className?: string;
 }
 
-const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className = "", variant = "default", size = "default", asChild = false, ...props }, ref) => {
-    const Comp = asChild ? Slot : "button"
-    
-    // Simple utility classes based on variant/size
-    const baseClass = "inline-flex items-center justify-center whitespace-nowrap rounded-xl text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
-    
-    const variants = {
-      default: "bg-playceOrange text-white hover:bg-playceOrange/90 shadow-sm",
-      secondary: "bg-playceBlue text-white hover:bg-playceBlue/90 shadow-sm",
-      outline: "border-2 border-playceBlue text-playceBlue hover:bg-playceBlue/10",
-      ghost: "hover:bg-playceCream text-playceInk hover:text-playceBlue",
-    }
-    
-    const sizes = {
-      default: "h-10 px-4 py-2",
-      sm: "h-9 rounded-lg px-3",
-      lg: "h-12 rounded-2xl px-8 text-base",
-      icon: "h-10 w-10",
-    }
+export function Button({
+  children,
+  variant = "primary",
+  size = "md",
+  className = "",
+  ...props
+}: ButtonProps) {
+  const base = `
+    inline-flex items-center justify-center font-heading font-bold
+    rounded-full cursor-pointer select-none
+    transition-all duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)]
+    focus:outline-none focus:ring-4 focus:ring-offset-2
+    active:scale-[0.97] active:transition-none
+    disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none
+  `;
 
-    return (
-      <Comp
-        className={`${baseClass} ${variants[variant]} ${sizes[size]} ${className}`}
-        ref={ref}
-        {...props}
-      />
-    )
-  }
-)
-Button.displayName = "Button"
+  const sizes = {
+    sm: "px-5 py-2 text-sm gap-1.5",
+    md: "px-7 py-3 text-base gap-2",
+    lg: "px-10 py-4 text-lg gap-2.5",
+  };
 
-export { Button }
+  const variants = {
+    primary: `
+      bg-gradient-to-r from-playceOrange to-playceCoral text-white
+      shadow-colored-coral
+      hover:shadow-colored-orange hover:scale-105
+      focus:ring-playceCoral/30
+    `,
+    secondary: `
+      bg-playceBlue text-white
+      shadow-colored-blue
+      hover:bg-playceBlue-700 hover:shadow-colored-blue hover:scale-105
+      focus:ring-playceBlue/30
+    `,
+    outline: `
+      bg-transparent border-2 border-playceBlue text-playceBlue
+      hover:bg-playceBlue hover:text-white hover:scale-105
+      focus:ring-playceBlue/30
+    `,
+    playful: `
+      bg-gradient-to-r from-playceSun to-playceOrange text-white
+      shadow-colored-sun
+      hover:shadow-colored-orange hover:scale-105 hover:animate-wiggle
+      focus:ring-playceSun/30
+    `,
+    magic: `
+      bg-gradient-to-r from-playceBlue via-playceTeal to-playceLeaf text-white
+      shadow-colored-teal
+      hover:shadow-colored-blue hover:scale-105
+      focus:ring-playceTeal/30
+      bg-[length:200%_auto] hover:animate-shimmer
+    `,
+  };
+
+  return (
+    <button
+      className={`${base} ${sizes[size]} ${variants[variant]} ${className}`}
+      {...props}
+    >
+      {children}
+    </button>
+  );
+}

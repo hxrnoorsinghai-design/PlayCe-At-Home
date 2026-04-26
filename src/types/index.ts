@@ -12,6 +12,7 @@ export type Zone = {
   colorToken: string;
   icon: string;
   heroIllustration: string;
+  galleryImages?: string[];
   learningGoals: string[];
   ageRanges: string[];
   featuredStations: string[];
@@ -32,6 +33,7 @@ export type Station = {
   ageMax: number;
   skillTags: string[];
   heroImage: string;
+  galleryImages?: string[];
   activityType?: string;
   relatedStations: string[];
   featured: boolean;
