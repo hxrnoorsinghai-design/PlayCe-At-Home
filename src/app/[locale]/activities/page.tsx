@@ -8,6 +8,8 @@ import { StoryBuilder } from "@/components/activities/StoryBuilder";
 import { BreathingGuide } from "@/components/activities/BreathingGuide";
 import { TimerModule } from "@/components/activities/TimerModule";
 
+import { ActivitiesGuideInit, ActivitiesGuideWrapper } from "@/components/activities/ActivitiesGuideWrapper";
+
 const activitySections = [
   {
     num: "01",
@@ -15,6 +17,8 @@ const activitySections = [
     titleEs: "Constructor de Historias BookQuest",
     descEn: "Inspired by the BookQuest Entry station — build your own story, word by word.",
     descEs: "Inspirado en la estación de entrada BookQuest — construye tu propia historia, palabra por palabra.",
+    tipEn: "Drag the words around to build a fun story! 📖",
+    tipEs: "¡Arrastra las palabras para construir una historia divertida! 📖",
     color: "playceBlue",
     image: "/images/playce/bookquest-entry.jpg",
     bgColor: "var(--color-playce-blue-50)",
@@ -25,6 +29,8 @@ const activitySections = [
     titleEs: "Guía de Respiración de Bienestar",
     descEn: "Inspired by the Wellness Nook — practice calm breathing together.",
     descEs: "Inspirado en el Rincón de Bienestar — practica la respiración tranquila juntos.",
+    tipEn: "Follow the circle to take deep, calming breaths! 🧘",
+    tipEs: "¡Sigue el círculo para respirar profundo y calmarte! 🧘",
     color: "playceTeal",
     image: "/images/playce/wellness-nook.jpg",
     bgColor: "var(--color-playce-teal-50)",
@@ -35,6 +41,8 @@ const activitySections = [
     titleEs: "Lavarse las Manos y Cepillarse los Dientes",
     descEn: "Inspired by the Bathroom Routines station — build healthy habits with fun timers.",
     descEs: "Inspirado en la estación Rutinas de Baño — construye hábitos saludables con temporizadores divertidos.",
+    tipEn: "Press start and keep scrubbing until the timer stops! 🧼",
+    tipEs: "¡Presiona iniciar y sigue frotando hasta que se detenga el temporizador! 🧼",
     color: "playceLeaf",
     image: "/images/playce/bathroom-station.jpg",
     bgColor: "var(--color-playce-leaf-50)",
@@ -45,6 +53,8 @@ const activitySections = [
     titleEs: "Emparejar Calcetines de Lavandería",
     descEn: "Inspired by the Laundry station — match socks by color and pattern.",
     descEs: "Inspirado en la estación de Lavandería — empareja calcetines por color y patrón.",
+    tipEn: "Can you find all the matching pairs of socks? 🧦",
+    tipEs: "¿Puedes encontrar todos los pares de calcetines iguales? 🧦",
     color: "playceCoral",
     image: "/images/playce/laundry-station.jpg",
     bgColor: "var(--color-playce-coral-50)",
@@ -55,6 +65,8 @@ const activitySections = [
     titleEs: "Menú de Cocina Comunitaria",
     descEn: "Inspired by the Community Kitchen — create your own menu from scratch.",
     descEs: "Inspirado en la Cocina Comunitaria — crea tu propio menú desde cero.",
+    tipEn: "What's for dinner? Build a yummy menu! 🍕",
+    tipEs: "¿Qué hay para cenar? ¡Construye un menú delicioso! 🍕",
     color: "playceOrange",
     image: "/images/playce/kitchen-station.jpg",
     bgColor: "var(--color-playce-orange-50)",
@@ -65,6 +77,8 @@ const activitySections = [
     titleEs: "Mercado de Agricultores",
     descEn: "Inspired by the Farmers Market station — count, sort, and sell.",
     descEs: "Inspirado en la estación del Mercado de Agricultores — cuenta, clasifica y vende.",
+    tipEn: "Help collect the right amount of fruits and veggies! 🥕",
+    tipEs: "¡Ayuda a recolectar la cantidad correcta de frutas y verduras! 🥕",
     color: "playceSun",
     image: "/images/playce/farmers-market.jpg",
     bgColor: "var(--color-playce-sun-50)",
@@ -91,6 +105,7 @@ export default async function ActivitiesPage({ params }: { params: Promise<{ loc
 
   return (
     <div className="overflow-hidden">
+      <ActivitiesGuideInit />
       {/* Hero */}
       <section className="relative py-24 px-4 gradient-mesh">
         <div className="max-w-4xl mx-auto text-center relative z-10">
@@ -154,7 +169,9 @@ export default async function ActivitiesPage({ params }: { params: Promise<{ loc
                 </ScrollReveal>
 
                 <ScrollReveal delay={0.15}>
-                  <ActivityComponent locale={locale} />
+                  <ActivitiesGuideWrapper messageEn={section.tipEn} messageEs={section.tipEs}>
+                    <ActivityComponent locale={locale} />
+                  </ActivitiesGuideWrapper>
                 </ScrollReveal>
               </div>
             </div>
