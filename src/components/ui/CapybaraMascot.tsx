@@ -88,8 +88,19 @@ export function CapybaraMascot() {
           {/* Mascot Container */}
           <div className="relative group pointer-events-auto cursor-pointer">
             <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              animate={{
+                y: [0, -20, 0, -10, 0],
+                x: [0, -15, 10, -5, 0],
+                rotate: [0, -5, 5, -2, 0],
+              }}
+              transition={{
+                duration: 6,
+                repeat: Infinity,
+                ease: "easeInOut",
+                times: [0, 0.25, 0.5, 0.75, 1]
+              }}
+              whileHover={{ scale: 1.1, rotate: 10, y: -10 }}
+              whileTap={{ scale: 0.9 }}
               onClick={() => {
                 if (!showMessage) {
                   setMessageIndex(Math.floor(Math.random() * messages[isEn ? "en" : "es"].length));
@@ -99,13 +110,25 @@ export function CapybaraMascot() {
               className="relative w-24 h-24 md:w-32 md:h-32 bg-white rounded-full shadow-colored-blue border-4 border-white overflow-hidden"
             >
               <div className="absolute inset-0 bg-playceBlue-50" />
-              <Image
-                src="/images/playce/capybara-mascot.png"
-                alt="Cappy the Capybara Mascot"
-                fill
-                className="object-cover p-2 group-hover:animate-wiggle"
-                style={{ mixBlendMode: 'multiply' }}
-              />
+              <motion.div 
+                className="absolute inset-0"
+                animate={{
+                  y: [0, -5, 0],
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+              >
+                <Image
+                  src="/images/playce/capybara-mascot.png"
+                  alt="Cappy the Capybara Mascot"
+                  fill
+                  className="object-cover p-2"
+                  style={{ mixBlendMode: 'multiply' }}
+                />
+              </motion.div>
             </motion.div>
             
             {/* Dismiss button on hover */}
