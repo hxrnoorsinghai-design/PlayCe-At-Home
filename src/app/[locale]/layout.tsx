@@ -20,6 +20,8 @@ const lexend = Lexend({
   weight: ["300", "400", "500", "600", "700"],
 });
 
+import { CapybaraMascot } from "@/components/ui/CapybaraMascot";
+
 export const metadata: Metadata = {
   title: "PLAYce at Home — Discovery PLAYce Digital Companion",
   description: "A digital companion to Beloit Public Library's Discovery PLAYce. Explore interactive zones, play learning games, and discover activities for children ages 0-6.",
@@ -49,13 +51,14 @@ export default async function RootLayout({
       lang={locale}
       className={`${nunito.variable} ${lexend.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-playceCream text-playceInk">
+      <body className="min-h-full flex flex-col bg-playceCream text-playceInk relative">
         <NextIntlClientProvider messages={messages}>
           <Navbar />
           <main className="flex-grow pt-14">
             {children}
           </main>
           <Footer />
+          <CapybaraMascot />
         </NextIntlClientProvider>
       </body>
     </html>
