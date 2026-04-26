@@ -70,7 +70,7 @@ export function MarketCountGame() {
           
           <div className="flex justify-between items-center px-4">
             <span className="font-medium text-playceInk/70">Collected: {currentCount} / {targetCount}</span>
-            <Button variant="ghost" onClick={() => setBasket([])} size="sm">Empty Basket</Button>
+            <Button variant="outline" onClick={() => setBasket([])} size="sm">Empty Basket</Button>
           </div>
         </div>
       )}

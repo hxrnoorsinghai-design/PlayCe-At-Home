@@ -15,7 +15,7 @@ export function FavoriteButton({ stationId, locale }: { stationId: string, local
 
   return (
     <Button 
-      variant={favorite ? "default" : "outline"} 
+      variant={favorite ? "primary" : "outline"} 
       onClick={toggle}
       className="w-full sm:w-auto mt-4 sm:mt-0"
     >

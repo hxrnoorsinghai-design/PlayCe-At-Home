@@ -2,8 +2,8 @@ import { type ReactNode, type ButtonHTMLAttributes } from "react";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
-  variant?: "primary" | "secondary" | "outline" | "playful" | "magic";
-  size?: "sm" | "md" | "lg";
+  variant?: "primary" | "secondary" | "outline" | "playful" | "magic" | "ghost";
+  size?: "sm" | "md" | "lg" | "icon";
   className?: string;
 }
 
@@ -27,6 +27,7 @@ export function Button({
     sm: "px-5 py-2 text-sm gap-1.5",
     md: "px-7 py-3 text-base gap-2",
     lg: "px-10 py-4 text-lg gap-2.5",
+    icon: "w-10 h-10 p-0 flex items-center justify-center rounded-full",
   };
 
   const variants = {
@@ -59,6 +60,11 @@ export function Button({
       hover:shadow-colored-blue hover:scale-105
       focus:ring-playceTeal/30
       bg-[length:200%_auto] hover:animate-shimmer
+    `,
+    ghost: `
+      bg-transparent text-warm-500
+      hover:bg-warm-100 hover:text-playceInk
+      focus:ring-warm-200/50
     `,
   };
 
