@@ -9,7 +9,7 @@ import { Card } from "@/components/ui/Card";
 import { ArrowRight, Sparkles, Map, Heart, ChevronDown } from "lucide-react";
 
 const galleryImages = [
-  "/images/playce/hero-cover.jpg",
+  "/images/playce/hero-magical.png",
   "/images/playce/baby-area-tree.jpg",
   "/images/playce/lagoon-overview.jpg",
   "/images/playce/city-facades.jpg",
@@ -49,7 +49,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         {/* Background image with Ken Burns effect */}
         <div className="absolute inset-0 animate-ken-burns">
           <Image
-            src="/images/playce/hero-cover.jpg"
+            src="/images/playce/hero-magical.png"
             alt="BPL Discovery PLAYce"
             fill
             className="object-cover"
