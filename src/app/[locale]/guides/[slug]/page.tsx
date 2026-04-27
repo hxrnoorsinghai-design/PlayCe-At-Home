@@ -1,11 +1,10 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
-import { Link } from "@/i18n/routing";
+import { Link, routing } from "@/i18n/routing";
 import { guides } from "@/content/guides";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { Button } from "@/components/ui/Button";
 import { ArrowLeft, BookOpen, Smile, MessageCircle } from "lucide-react";
-import ReactMarkdown from "react-markdown";
 
 const iconMap = {
   Smile,
@@ -14,9 +13,13 @@ const iconMap = {
 };
 
 export async function generateStaticParams() {
-  return guides.map((guide) => ({
-    slug: guide.slug,
-  }));
+  const params = [];
+  for (const locale of routing.locales) {
+    for (const guide of guides) {
+      params.push({ locale, slug: guide.slug });
+    }
+  }
+  return params;
 }
 
 export default async function GuideArticlePage({
@@ -34,6 +37,7 @@ export default async function GuideArticlePage({
   }
 
   const Icon = iconMap[guide.iconName];
+  const content = isEn ? guide.contentEn : guide.contentEs;
 
   return (
     <div className="overflow-hidden bg-warm-50 min-h-screen pb-24">
@@ -92,9 +96,9 @@ export default async function GuideArticlePage({
                 prose-strong:text-playceInk
                 prose-a:text-playceCoral hover:prose-a:text-playceOrange
             ">
-              <ReactMarkdown>
-                {isEn ? guide.contentEn : guide.contentEs}
-              </ReactMarkdown>
+              <div className="whitespace-pre-wrap">
+                {content}
+              </div>
             </div>
           </div>
         </ScrollReveal>
@@ -102,4 +106,5 @@ export default async function GuideArticlePage({
     </div>
   );
 }
+
 
