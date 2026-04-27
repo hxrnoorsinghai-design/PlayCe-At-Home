@@ -4,8 +4,14 @@ import { Link } from "@/i18n/routing";
 import { guides } from "@/content/guides";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { Button } from "@/components/ui/Button";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, BookOpen, Smile, MessageCircle } from "lucide-react";
 import ReactMarkdown from "react-markdown";
+
+const iconMap = {
+  Smile,
+  BookOpen,
+  MessageCircle,
+};
 
 export async function generateStaticParams() {
   return guides.map((guide) => ({
@@ -27,7 +33,7 @@ export default async function GuideArticlePage({
     notFound();
   }
 
-  const Icon = guide.icon;
+  const Icon = iconMap[guide.iconName];
 
   return (
     <div className="overflow-hidden bg-warm-50 min-h-screen pb-24">
@@ -96,3 +102,4 @@ export default async function GuideArticlePage({
     </div>
   );
 }
+

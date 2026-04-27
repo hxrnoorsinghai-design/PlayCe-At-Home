@@ -3,12 +3,29 @@ import { Link } from "@/i18n/routing";
 import { Card } from "@/components/ui/Card";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { WaveDivider } from "@/components/ui/WaveDivider";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, BookOpen, Smile, MessageCircle } from "lucide-react";
 import { guides } from "@/content/guides";
+
+const iconMap = {
+  Smile,
+  BookOpen,
+  MessageCircle,
+};
 
 export default async function CaregiverGuidesPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const isEn = locale === "en";
+
+  if (!guides || guides.length === 0) {
+    return (
+      <div className="py-24 text-center">
+        <p className="text-warm-500">{isEn ? "No guides found." : "No se encontraron guías."}</p>
+      </div>
+    );
+  }
+
+  const featuredGuide = guides[0];
+  const FeaturedIcon = iconMap[featuredGuide.iconName];
 
   return (
     <div className="overflow-hidden">
@@ -31,50 +48,45 @@ export default async function CaregiverGuidesPage({ params }: { params: Promise<
         </div>
       </section>
 
-      {/* Featured Guide (first one) */}
+      {/* Featured Guide */}
       <section className="max-w-6xl mx-auto px-4 py-16">
         <ScrollReveal>
-          {(() => {
-            const FeaturedIcon = guides[0].icon;
-            return (
-              <Link href={`/guides/${guides[0].slug}` as any} className="block">
-                <Card variant="feature" className="overflow-hidden group cursor-pointer">
-                  <div className="flex flex-col md:flex-row">
-                    <div className="relative w-full md:w-1/2 h-72 md:h-auto min-h-[300px] overflow-hidden">
-                      <Image
-                        src={guides[0].image}
-                        alt={guides[0].titleEn}
-                        fill
-                        className="object-cover transition-transform duration-700 group-hover:scale-105"
-                        sizes="(max-width: 768px) 100vw, 50vw"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-r from-transparent to-white/10" />
-                    </div>
-                    <div className="flex-1 p-8 md:p-12 flex flex-col justify-center">
-                      <div
-                        className={`w-14 h-14 rounded-2xl flex items-center justify-center text-white shadow-sm mb-6 bg-${guides[0].color}`}
-                      >
-                        <FeaturedIcon className="w-7 h-7" />
-                      </div>
-                      <span className="text-xs font-bold uppercase tracking-wider text-warm-400 mb-2">
-                        {isEn ? "Featured Guide" : "Guía Destacada"}
-                      </span>
-                      <h2 className="text-fluid-2xl font-heading font-black text-playceInk mb-4 group-hover:text-playceBlue transition-colors">
-                        {isEn ? guides[0].titleEn : guides[0].titleEs}
-                      </h2>
-                      <p className="text-warm-500 leading-relaxed mb-6">
-                        {isEn ? guides[0].descEn : guides[0].descEs}
-                      </p>
-                      <div className="flex items-center gap-2 font-heading font-bold text-sm text-playceCoral group-hover:gap-4 transition-all">
-                        {isEn ? "Read Guide" : "Leer Guía"}
-                        <ArrowRight className="w-4 h-4" />
-                      </div>
-                    </div>
+          <Link href={`/guides/${featuredGuide.slug}` as any} className="block">
+            <Card variant="feature" className="overflow-hidden group cursor-pointer">
+              <div className="flex flex-col md:flex-row">
+                <div className="relative w-full md:w-1/2 h-72 md:h-auto min-h-[300px] overflow-hidden">
+                  <Image
+                    src={featuredGuide.image}
+                    alt={featuredGuide.titleEn}
+                    fill
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent to-white/10" />
+                </div>
+                <div className="flex-1 p-8 md:p-12 flex flex-col justify-center">
+                  <div
+                    className={`w-14 h-14 rounded-2xl flex items-center justify-center text-white shadow-sm mb-6 bg-${featuredGuide.color}`}
+                  >
+                    <FeaturedIcon className="w-7 h-7" />
                   </div>
-                </Card>
-              </Link>
-            );
-          })()}
+                  <span className="text-xs font-bold uppercase tracking-wider text-warm-400 mb-2">
+                    {isEn ? "Featured Guide" : "Guía Destacada"}
+                  </span>
+                  <h2 className="text-fluid-2xl font-heading font-black text-playceInk mb-4 group-hover:text-playceBlue transition-colors">
+                    {isEn ? featuredGuide.titleEn : featuredGuide.titleEs}
+                  </h2>
+                  <p className="text-warm-500 leading-relaxed mb-6">
+                    {isEn ? featuredGuide.descEn : featuredGuide.descEs}
+                  </p>
+                  <div className="flex items-center gap-2 font-heading font-bold text-sm text-playceCoral group-hover:gap-4 transition-all">
+                    {isEn ? "Read Guide" : "Leer Guía"}
+                    <ArrowRight className="w-4 h-4" />
+                  </div>
+                </div>
+              </div>
+            </Card>
+          </Link>
         </ScrollReveal>
       </section>
 
@@ -84,11 +96,11 @@ export default async function CaregiverGuidesPage({ params }: { params: Promise<
         <div className="bg-warm-50 py-16 px-4">
           <div className="max-w-6xl mx-auto space-y-8">
             {guides.slice(1).map((guide, idx) => {
-              const Icon = guide.icon;
+              const Icon = iconMap[guide.iconName];
               const isReversed = idx % 2 !== 0;
 
               return (
-                <ScrollReveal key={guide.titleEn} variant={isReversed ? "slideLeft" : "slideRight"}>
+                <ScrollReveal key={guide.slug} variant={isReversed ? "slideLeft" : "slideRight"}>
                   <Link href={`/guides/${guide.slug}` as any} className="block">
                     <Card variant="feature" className="overflow-hidden group cursor-pointer">
                       <div className={`flex flex-col ${isReversed ? "md:flex-row-reverse" : "md:flex-row"}`}>
@@ -142,3 +154,4 @@ export default async function CaregiverGuidesPage({ params }: { params: Promise<
     </div>
   );
 }
+

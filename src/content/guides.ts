@@ -1,12 +1,10 @@
-import { BookOpen, Smile, MessageCircle, type LucideIcon } from "lucide-react";
-
 export interface Guide {
   slug: string;
   titleEn: string;
   titleEs: string;
   descEn: string;
   descEs: string;
-  icon: LucideIcon;
+  iconName: "Smile" | "BookOpen" | "MessageCircle";
   color: string;
   image: string;
   contentEn: string;
@@ -20,7 +18,7 @@ export const guides: Guide[] = [
     titleEs: "Cómo jugar con su hijo sin pensarlo demasiado",
     descEn: "You don't need a lesson plan. Just follow their lead and have fun. This guide gives you simple, actionable ways to engage during play.",
     descEs: "No necesitas un plan de lección. Solo sigue su ejemplo y diviértete. Esta guía te da formas simples y prácticas de participar durante el juego.",
-    icon: Smile,
+    iconName: "Smile",
     color: "playceCoral",
     image: "/images/playce/mood-board.jpg",
     contentEn: `
@@ -45,7 +43,7 @@ La regla más importante del juego es simple: sigue la iniciativa de tu hijo. No
 - **Ponte a su nivel:** Siéntate en el suelo o arrodíllate para estar cara a cara.
 - **Narra lo que están haciendo:** "¡Oh, pusiste el bloque rojo encima del bloque azul!" Esto desarrolla el vocabulario sin sentirse como una lección.
 - **Haz preguntas abiertas:** En lugar de "¿Es eso un coche?", intenta "¿Qué está haciendo tu vehículo hoy?"
-- **Abraza las tonterías:** No tengas miedo de usar voces divertidas o hacer caras graciosas. El juego se trata de conexión, no de perfección.
+- **Abraza las tonterías:** Don't be afraid to use funny voices or make silly faces. Play is about connection, not perfection.
 
 Recuerda, tú eres suficiente. Tu presencia y atención son las herramientas más valiosas para el desarrollo de tu hijo.
     `
@@ -56,7 +54,7 @@ Recuerda, tú eres suficiente. Tu presencia y atención son las herramientas má
     titleEs: "Ayudando a desarrollar habilidades tempranas de lectura a través del juego",
     descEn: "Simple ways to point out letters, use rich vocabulary, and tell stories together. Every interaction builds literacy.",
     descEs: "Formas sencillas de señalar letras, usar vocabulario rico y contar historias juntos. Cada interacción construye la lectura.",
-    icon: BookOpen,
+    iconName: "BookOpen",
     color: "playceBlue",
     image: "/images/playce/bookquest-entry.jpg",
     contentEn: `
@@ -94,7 +92,7 @@ El objetivo es hacer que el idioma y los libros sean agradables. Si leer parece 
     titleEs: "Apoyando las emociones a través del juego de simulación",
     descEn: "Using the Wellness and City zones to explore big feelings playfully. Help your child name and manage emotions.",
     descEs: "Usar las zonas de Bienestar y Ciudad para explorar grandes sentimientos de forma lúdica. Ayuda a tu hijo a nombrar y manejar emociones.",
-    icon: MessageCircle,
+    iconName: "MessageCircle",
     color: "playceTeal",
     image: "/images/playce/wellness-nook.jpg",
     contentEn: `
