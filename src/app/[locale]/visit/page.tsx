@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/Button";
 import { ScrollReveal, StaggerContainer, StaggerItem } from "@/components/ui/ScrollReveal";
 import { WaveDivider } from "@/components/ui/WaveDivider";
 import { Clock, Info, User, CheckCircle2, MapPin, ArrowRight } from "lucide-react";
+import { ItineraryCTA } from "@/components/visit/ItineraryCTA";
 
 export default async function VisitPlannerPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -160,12 +161,7 @@ export default async function VisitPlannerPage({ params }: { params: Promise<{ l
 
         {/* CTA */}
         <ScrollReveal>
-          <div className="text-center">
-            <Button variant="magic" size="lg">
-              {isEn ? "Generate Custom Itinerary" : "Generar Itinerario Personalizado"}
-              <ArrowRight className="w-5 h-5 ml-1" />
-            </Button>
-          </div>
+          <ItineraryCTA isEn={isEn} />
         </ScrollReveal>
       </section>
     </div>

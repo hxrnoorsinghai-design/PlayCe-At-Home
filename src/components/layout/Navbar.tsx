@@ -5,6 +5,7 @@ import { Link, usePathname } from "@/i18n/routing";
 import { useLocale } from "next-intl";
 import { Menu, X, Globe } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 
 const navLinks = [
   { href: "/explore" as const, labelEn: "Explore", labelEs: "Explorar", color: "var(--color-playce-blue)" },
@@ -42,19 +43,20 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
             {/* Logo */}
-            <Link href={"/" as any} className="group flex items-center gap-2">
-              <motion.div
-                whileHover={{ rotate: [0, -5, 5, 0], scale: 1.05 }}
-                transition={{ duration: 0.4 }}
-                className="w-10 h-10 rounded-xl bg-gradient-to-br from-playceBlue to-playceTeal flex items-center justify-center shadow-colored-blue"
-              >
-                <span className="text-white font-heading font-black text-lg">P</span>
-              </motion.div>
-              <div className="flex flex-col">
-                <span className="font-heading font-extrabold text-xl text-playceInk leading-tight tracking-tight">
-                  PLAYce
+            <Link href={"/" as any} className="group flex items-center gap-3">
+              <Image
+                src="/images/bpl-logo.png"
+                alt="Beloit Public Library Logo"
+                width={180}
+                height={60}
+                className="object-contain h-10 w-auto transition-transform duration-300 group-hover:scale-105"
+              />
+              <div className="h-6 w-px bg-warm-300 mx-1 hidden sm:block"></div>
+              <div className="hidden sm:flex flex-col">
+                <span className="font-heading font-extrabold text-lg text-playceInk leading-none tracking-tight">
+                  Discovery PLAYce
                 </span>
-                <span className="text-[10px] font-medium text-warm-400 uppercase tracking-[0.2em] leading-none">
+                <span className="text-[9px] font-bold text-warm-400 uppercase tracking-[0.1em] leading-tight">
                   at Home
                 </span>
               </div>
